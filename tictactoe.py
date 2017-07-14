@@ -52,14 +52,14 @@ def full_board_check(board):
 			return False
 	return True
 
-def player_choice(board):
+def player_choice(board, marker):
 	position = ' '
 	while position not in '1 2 3 4 5 6 7 8 9'.split() or not space_check(board, int(position)):
-		position = raw_input('Choose your next position: (1-9) ')
+		position = raw_input(marker + ' choose your next position: (1-9) ')
 	return int(position)
 
 def replay():
-	return raw_input('Do you want to play again? Enter Yes or No: ')
+	return raw_input('Do you want to play again? Enter Yes or No: ').lower().startswith('y')
 
 print('Welcome to Tic Tac Toe!')
 
@@ -73,12 +73,12 @@ while True:
 	while game_on:
 		if turn == 'Player 1':
 			display_board(theBoard)
-			position = player_choice(theBoard)
+			position = player_choice(theBoard, turn)
 			place_marker(theBoard, player1_marker, position)
 
 			if win_check(theBoard, player1_marker):
 				display_board(theBoard)
-				print('Congratulations! You have won the game!')
+				print('Congratulations! Player 1 has won the game!')
 				game_on = False
 			else:
 				if full_board_check(theBoard):
@@ -90,12 +90,12 @@ while True:
 
 		else:
 			display_board(theBoard)
-			position = player_choice(theBoard)
+			position = player_choice(theBoard, turn)
 			place_marker(theBoard, player2_marker, position)
 
 			if win_check(theBoard, player2_marker):
 				display_board(theBoard)
-				print('Player 2 has won!')
+				print('Congratulations! Player 2 has won the game!')
 				game_on = False
 			else:
 				if full_board_check(theBoard):
